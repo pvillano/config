@@ -3,6 +3,38 @@
 # remember to set the execution policy first
 # (In an admin powershell)
 # Set-ExecutionPolicy RemoteSigned
+# also install wsl
+# wsl --install
+# reboot
+
+
+$uninstall_app_ids = @(
+    "Microsoft.549981C3F5F10_8wekyb3d8bbwe",
+    "Microsoft.BingNews_8wekyb3d8bbwe",
+    "Microsoft.BingWeather_8wekyb3d8bbwe",
+    "Microsoft.Edge",
+    "Microsoft.EdgeWebView2Runtime",
+    "Microsoft.Getstarted_8wekyb3d8bbwe",
+    "Microsoft.MicrosoftEdge.Stable_8wekyb3d8bbwe",
+    "Microsoft.MicrosoftOfficeHub_8wekyb3d8bbwe",
+    "Microsoft.MicrosoftSolitaireCollection_8wekyb3d8bbwe",
+    "Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe",
+    "Microsoft.OneDrive",
+    "Microsoft.OneDriveSync_8wekyb3d8bbwe",
+    "Microsoft.People_8wekyb3d8bbwe",
+    "Microsoft.Todos_8wekyb3d8bbwe",
+    "Microsoft.WindowsAlarms_8wekyb3d8bbwe",
+    "microsoft.windowscommunicationsapps_8wekyb3d8bbwe",
+    "Microsoft.WindowsFeedbackHub_8wekyb3d8bbwe",
+    "Microsoft.WindowsMaps_8wekyb3d8bbwe",
+    "Microsoft.ZuneMusic_8wekyb3d8bbwe",
+    "Microsoft.ZuneVideo_8wekyb3d8bbwe",
+    "Microsoft Edge Update",
+    "MicrosoftTeams_8wekyb3d8bbwe"
+);
+Foreach ($app_id in $uninstall_app_ids) {
+    winget uninstall --silent --id $app_id
+}
 
 $app_ids = @(
     "7zip.7zip" ,
