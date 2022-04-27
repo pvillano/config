@@ -13,7 +13,6 @@ From https://news.ycombinator.com/item?id=30665331
  * Hover over the flexible spaces and drag them out
  * Drag the Search box back next to the URL bar
  * Drag the Pocket icon out if you don’t use it
- * Click the Title Bar checkbox to enable it again
 
 
 
