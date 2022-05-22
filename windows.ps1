@@ -61,6 +61,7 @@ $app_ids = @(
     "Julialang.Julia" ,
     "Microsoft.PowerShell" ,
     "Microsoft.WindowsTerminal" ,
+    "Microsoft.YourPhone_8wekyb3d8bbwe" ,
     "Mozilla.Firefox" ,
     "Mozilla.Firefox.DeveloperEdition" ,
     "MullvadVPN.MullvadVPN" ,
