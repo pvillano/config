@@ -2,19 +2,21 @@
 sudo apt update
 sudo apt upgrade -y
 
-sudo apt install ffmpeg \
+sudo apt install -y ffmpeg \
     moreutils \
     python3-pip \
     thefuck \
     unzip
 
+echo 'eval $(thefuck --alias)' >> ~/.bashrc
+
 if [[ $(grep -iE "microsoft|msft|wsl" /proc/version) ]]; then
     echo "WSL detected"
     echo "skipping mullvad, lxd"
 else
-    sudo apt install lxd
+    sudo apt install -y lxd
     curl -L "https://mullvad.net/download/app/deb/latest/" -o mullvad.deb && \
-    sudo apt install ./mullvad.deb
+    sudo apt install -y ./mullvad.deb
 fi
 
 sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
