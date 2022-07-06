@@ -97,6 +97,13 @@ Foreach ($app_id in $app_ids) {
 # Shutdown Timer doesn't have a semantic ID, so I'm making double sure
 winget install --silent --accept-package-agreements --name "Shutdown Timer Classic" --id "9NTDG6C9BTTW"
 
+
+# registry tweaks - untested
+
+# disable Bing in Start Menu
+New-Item -Path HKCU:HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search -Name BingSearchEnabled -Value 0
+
+
 # Autodesk Fusion 360
 Start-Process "https://www.autodesk.com/products/fusion-360/personal-download"
 # Battle.net
