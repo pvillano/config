@@ -131,15 +131,6 @@ def convert(in_file, out_file, target_rate, target_audio_rate):
         capture_output=False,
         check=True,
     )
-
-    #   ffmpeg \
-    #     -i "$1" \
-    #     -c:v libx264 \
-    #     -b:v "$TARGET_VIDEO_RATE"k \
-    #     -pass 2 \
-    #     -c:a aac \
-    #     -b:a "$TARGET_AUDIO_RATE"k \
-    #     "$TARGET_FILE"
     second_pass_process = subprocess.run(
         [
             "ffmpeg",
@@ -151,10 +142,8 @@ def convert(in_file, out_file, target_rate, target_audio_rate):
             f"{target_rate}k",  # todo
             "-pass",
             "2",
-            "-c:a",
-            "aac",
-            "-b:a",
-            f"{target_audio_rate}",
+            "-c:a",  # select audio codec: don't change it
+            "copy",
             out_file,
             "",
         ],
