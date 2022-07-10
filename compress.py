@@ -33,22 +33,16 @@ def main():
 
 
 def get_duration(filename) -> float:
-    # # Original duration in seconds
-    # ORIGINAL_DURATION =$(
-    #         ffprobe \
-    #         - v error \
-    #     -show_entries format=duration \
-    #     -of csv=p=0 "$1"
-    # )
+    # https://ffmpeg.org/ffprobe.html
     completed_process = subprocess.run(
         [
             "ffprobe",
             "-v",
             "error",
             "-show_entries",
-            "format=duration",
-            "-of",
-            "csv=p=0",
+            "format=duration",  # SECTION_NAME=LOCAL_SECTION_ENTRIES
+            "-print_format",  # output format
+            "csv=print_section=0",
             filename,
         ],
         capture_output=True,
@@ -115,32 +109,24 @@ def compress(filename, size):
 
 
 def convert(in_file, out_file, target_rate, target_audio_rate):
-    # # Perform the conversion
-    # ffmpeg \
-    #   -y \
-    #   -i "$1" \
-    #   -c:v libx264 \
-    #   -b:v "$TARGET_VIDEO_RATE"k \
-    #   -pass 1 \
-    #   -an \
-    #   -f mp4 \
-    #   /dev/null &&
+    # https://ffmpeg.org/ffmpeg-all.html
+
     first_pass_process = subprocess.run(
         [
             "ffmpeg",
-            "-y",
+            "-y",  # Overwrite output files without asking (global)
             "-i",
             in_file,
-            "-c:v",
+            "-codec:v",
             "libx264",
-            "-b:v",
+            "-b:v",  # set bitrate
             f"{target_rate}k",  # todo
             "-pass",
             "1",
-            "-an",
-            "-f",
-            "mp4",
-            "/dev/null",
+            "-an",  # skip audio stream
+            "-f",  # output
+            "rawvideo",  # "encode" into raw video
+            "/dev/null",  # dump to null
         ],
         capture_output=False,
         check=True,
