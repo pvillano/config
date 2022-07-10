@@ -83,6 +83,5 @@ ffmpeg \
     -c:v libx264 \
     -b:v "$TARGET_VIDEO_RATE"k \
     -pass 2 \
-    -c:a aac \
-    -b:a "$TARGET_AUDIO_RATE"k \
+    -c:a copy \
     "$TARGET_FILE"
