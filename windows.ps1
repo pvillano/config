@@ -50,6 +50,7 @@ $app_ids = @(
     "CrystalDewWorld.CrystalDiskMark" ,
     "Discord.Discord" ,
     "ElectronicArts.EADesktop" ,
+    "eloston.ungoogled-chromium" ,
     "EpicGames.EpicGamesLauncher" ,
     "GIMP.GIMP" ,
     "Git.Git" ,
@@ -57,10 +58,13 @@ $app_ids = @(
     "GOG.Galaxy" ,
     "Google.ChromeRemoteDesktop" ,
     "Inkscape.Inkscape" ,
-    "JetBrains.Toolbox" ,
+    "ItchIo.Itch" ,
+    "JetBrains.PyCharm.Community" ,
     "Julialang.Julia" ,
     "Microsoft.PowerShell" ,
+    "Microsoft.VisualStudio.2022.BuildTools" ,
     "Microsoft.WindowsTerminal" ,
+    "Microsoft.WindowsSDK" ,
     "Microsoft.YourPhone_8wekyb3d8bbwe" ,
     "Mozilla.Firefox" ,
     "Mozilla.Firefox.DeveloperEdition" ,
@@ -75,6 +79,9 @@ $app_ids = @(
     "Python.Python.3" ,
     "qBittorrent.qBittorrent" ,
     "QMK.QMKToolbox" ,
+    "RaspberryPiFoundation.RaspberryPiImager" ,
+    "Resplendence.LatencyMon" ,
+    "Rustlang.Rustup" ,
     "Spotify.Spotify" ,
     "Ubisoft.Connect" ,
     "Ultimaker.Cura" ,
@@ -104,11 +111,15 @@ winget install --silent --accept-package-agreements --name "Shutdown Timer Class
 New-Item -Path HKCU:HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search -Name BingSearchEnabled -Value 0
 
 
-# Autodesk Fusion 360
-Start-Process "https://www.autodesk.com/products/fusion-360/personal-download"
-# Battle.net
-Start-Process "https://www.blizzard.com/en-us/download/confirmation?platform=windows&locale=en_US&product=bnetdesk"
-# MobaXterm
-Start-Process "https://mobaxterm.mobatek.net/download-home-edition.html"
-# Rockstar Games Launcher
-Start-Process "https://gamedownloads.rockstargames.com/public/installer/Rockstar-Games-Launcher.exe"
+$app_urls = @(
+    "https://www.autodesk.com/products/fusion-360/personal-download",
+    "https://www.blizzard.com/en-us/download/confirmation?platform=windows&locale=en_US&product=bnetdesk",
+    "https://lychee.mango3d.io/",
+    "https://mobaxterm.mobatek.net/download-home-edition.html",
+    "https://gamedownloads.rockstargames.com/public/installer/Rockstar-Games-Launcher.exe"
+);
+
+Foreach ($app_url in $app_urls) {
+    Start-Process $app_url
+}
+
