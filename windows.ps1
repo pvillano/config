@@ -1,18 +1,38 @@
 #!/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -File
 
-# remember to set the execution policy first
+# (install firefox, log in and download this file...)
+
+#### Set execution policy manually
 # (In an admin powershell)
-# Set-ExecutionPolicy RemoteSigned
-# also install wsl
-# wsl --install
+# >>> Set-ExecutionPolicy Bypass
 # reboot
 
+#### Explorer Tweaks
+# View > Advanced Settings > Show hidden files, folders, and drives
+# View > Advanced Settings > Hide extensions for known file types -- uncheck
+
+#### Taskbar Tweaks
+# Settings > Personalization > Taskbar
+#   > Taskbar items -- hide all
+#   > Other system tray icons -- all on
+
+
+#### look into using data links to do the thing
+# ms-settings:privacy?activationSource=SMC-IA-4027945
+
+
+#### install wsl
+# >>> wsl --install
+
+winget list --accept-source-agreements | Out-Null
 
 $uninstall_app_ids = @(
+    "Clipchamp.Clipchamp_yxz26nhyzhsrt",
+    "Disney.37853FC22B2CE_6rarf9sa4v8jt",
     "Microsoft.549981C3F5F10_8wekyb3d8bbwe",
     "Microsoft.BingNews_8wekyb3d8bbwe",
     "Microsoft.BingWeather_8wekyb3d8bbwe",
-    "Microsoft.Edge",
+#    "Microsoft.Edge",
     "Microsoft.EdgeWebView2Runtime",
     "Microsoft.Getstarted_8wekyb3d8bbwe",
     "Microsoft.MicrosoftEdge.Stable_8wekyb3d8bbwe",
@@ -36,6 +56,8 @@ $uninstall_app_ids = @(
 Foreach ($app_id in $uninstall_app_ids) {
     winget uninstall --silent --id $app_id
 }
+
+Write-Host finished uninstalling
 
 $app_ids = @(
     "7zip.7zip",
@@ -110,16 +132,25 @@ winget install --silent --accept-package-agreements --name "Shutdown Timer Class
 # registry tweaks - untested
 
 # disable Bing in Start Menu
-New-Item -Path HKCU:HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search -Name BingSearchEnabled -Value 0
+New-ItemProperty -Path HKCU:HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search -Name BingSearchEnabled -Value 0
+
+git config --global core.autocrlf input
+
 
 # Apps which have to be downloaded and installed manually
 $app_urls = @(
-    "https://www.autodesk.com/products/fusion-360/personal-download",
+    "https://www.autodesk.com/products/fusion-360/appstream",
     "https://www.blizzard.com/en-us/download/confirmation?platform=windows&locale=en_US&product=bnetdesk",
     "https://lychee.mango3d.io/",
     "https://mobaxterm.mobatek.net/download-home-edition.html",
     "https://gamedownloads.rockstargames.com/public/installer/Rockstar-Games-Launcher.exe"
 );
+
+# TODO
+# winget list --name "Autodesk Fusion 360"
+# winget list --name "Battle.net"
+# winget list --name "LycheeSlicer"
+# winget list --name "Rockstar Games Launcher"
 
 Foreach ($app_url in $app_urls) {
     Start-Process $app_url
