@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mm710 flag="1808" exportPath="C:\Users\rocky\Documents\GitHub\config\" openExePath="" currentProfileID="1">
+    <profile id="1" name="Universal Profile" exe="">
+        <buttons comboEnable="0" comboView="0">
+            <mapping>
+                <btn id="0" assign="176"/>
+                <btn id="1" assign="177"/>
+                <btn id="2" assign="178"/>
+                <btn id="3" assign="179"/>
+                <btn id="4" assign="180"/>
+                <btn id="5" assign="1023"/>
+                <btn id="6" assign="1281"/>
+                <btn id="7" assign="1280"/>
+                <btn id="8" assign="0"/>
+                <btn id="9" assign="0"/>
+                <btn id="10" assign="0"/>
+                <btn id="11" assign="306"/>
+                <btn id="12" assign="0"/>
+            </mapping>
+            <macros>
+                <macro name="(KB):F5" id="5" mode="0">
+                    <action key="62" event="1" timer="20"/>
+                    <action key="62" event="0" timer="20"/>
+                </macro>
+            </macros>
+        </buttons>
+        <performance>
+            <config dpi_level="0">
+                <dpi x="1600" y="1600" enable="1"/>
+                <dpi x="1600" y="1600" enable="0"/>
+                <dpi x="1600" y="1600" enable="0"/>
+                <dpi x="1600" y="1600" enable="0"/>
+                <dpi x="1600" y="1600" enable="0"/>
+                <dpi x="1600" y="1600" enable="0"/>
+                <dpi x="1600" y="1600" enable="0"/>
+                <polling_rate>1</polling_rate>
+                <angle_snapping>0</angle_snapping>
+                <lift_off_distance>0</lift_off_distance>
+                <angle_tunability>0</angle_tunability>
+                <os_sensitivity>4</os_sensitivity>
+                <os_double_click_speed>7</os_double_click_speed>
+                <button_response_time>1</button_response_time>
+            </config>
+            <surface curr_surface="2022-10-27 01:44:16">
+                <value name="2022-10-27 01:44:16" learn1="18" learn2="e4"/>
+                <value name="DEFAULT SURFACE" learn1="a" learn2="10"/>
+            </surface>
+        </performance>
+        <macros path="" currMacro=""/>
+    </profile>
+</mm710>
