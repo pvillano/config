@@ -4,8 +4,9 @@
 
 #### Set execution policy manually
 # (In an admin powershell)
-# >>> Set-ExecutionPolicy Bypass
+# >>> Set-ExecutionPolicy Unrestricted
 # reboot
+# This must be done for each version of powershell!!!
 
 #### Explorer Tweaks
 # View > Advanced Settings > Show hidden files, folders, and drives
@@ -32,7 +33,7 @@ $uninstall_app_ids = @(
     "Microsoft.549981C3F5F10_8wekyb3d8bbwe",
     "Microsoft.BingNews_8wekyb3d8bbwe",
     "Microsoft.BingWeather_8wekyb3d8bbwe",
-#    "Microsoft.Edge",
+#    "Microsoft.Edge", # it just doesn't work now
     "Microsoft.EdgeWebView2Runtime",
     "Microsoft.Getstarted_8wekyb3d8bbwe",
     "Microsoft.MicrosoftEdge.Stable_8wekyb3d8bbwe",
