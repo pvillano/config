@@ -3,16 +3,11 @@
 import subprocess
 import sys
 
-USAGE = """Usage: compress FILE [SIZE]
+USAGE = """Usage: compress FILE.mp4 [SIZE]
 Compress the given file into an mp4 of size SIZE, in MB. Defaults to 8MB if not given.
-Special value "overwatch" trims the video to 00:05-0:17 before compressing to 8MB
+new file name is FILE.SIZEmb.mp4
 """
 DEFAULT_MB = 8
-
-
-def dprint(*args, sep=" ", end="\n"):
-    if __debug__:
-        print(*args, sep=sep, end=end, file=sys.stderr)
 
 
 def main():
@@ -24,12 +19,8 @@ def main():
     if argc == 2:
         size = 8
     else:
-        size_str = sys.argv[2]
-        if size_str.lower() == "overwatch":
-            raise NotImplementedError("todo lol")
-        size = int(size_str)
-
-    compress(filename, size)
+        size = int(sys.argv[2])
+    compress_to_size(filename, size)
 
 
 def get_duration(filename) -> float:
@@ -37,115 +28,73 @@ def get_duration(filename) -> float:
     completed_process = subprocess.run(
         [
             "ffprobe",
-            "-v",
-            "error",
-            "-show_entries",
-            "format=duration",  # SECTION_NAME=LOCAL_SECTION_ENTRIES
-            "-print_format",  # output format
-            "csv=print_section=0",
+            "-loglevel", "error",
+            "-show_entries", "format=duration",  # in the format section, the duration value
+            "-print_format", "csv=print_section=0",  # use csv with no section names
             filename,
         ],
         capture_output=True,
         check=True,
     )
-    duration_str = completed_process.stdout
-    dprint(f"{completed_process=}")
-    exit()
-    return float(duration_str)
+    return float(completed_process.stdout)
 
 
-def compress(filename, size):
+def get_audio_bitrate(filename) -> float:
+    completed_process = subprocess.run(
+        [
+            "ffprobe",
+            "-loglevel", "error",
+            "-select_streams", "a:0",  # first audio stream
+            "-show_entries", "stream=bit_rate",  # in the stream section, the bit rate
+            "-print_format", "csv=print_section=0",  # use csv with no section names
+            filename,
+        ],
+        capture_output=True,
+        check=True,
+    )
+    return float(completed_process.stdout)
+
+
+def compress_to_size(filename, size_megabytes) -> None:
     duration = get_duration(filename)
-    # # Original audio rate
-    # ORIGINAL_AUDIO_RATE=$(
-    #   ffprobe \
-    #     -v error \
-    #     -select_streams a:0 \
-    #     -show_entries stream=bit_rate \
-    #     -of csv=p=0 "$1"
-    # )
-    #
-    # # Original audio rate in KiB/s
-    # ORIGINAL_AUDIO_RATE=$(
-    #   awk \
-    #     -v arate="$ORIGINAL_AUDIO_RATE" \
-    #     'BEGIN { printf "%.0f", (arate / 1024) }'
-    # )
-    #
-    # # Target size is required to be less than the size of the original audio stream
-    # T_MINSIZE=$(
-    #   awk \
-    #     -v arate="$ORIGINAL_AUDIO_RATE" \
-    #     -v duration="$ORIGINAL_DURATION" \
-    #     'BEGIN { printf "%.2f", ( (arate * duration) / 8192 ) }'
-    # )
-    #
-    # # Equals 1 if target size is ok, 0 otherwise
-    # IS_MINSIZE=$(
-    #   awk \
-    #     -v size="$TARGET_SIZE" \
-    #     -v minsize="$T_MINSIZE" \
-    #     'BEGIN { print (minsize < size) }'
-    # )
-    #
-    # # Give useful information if size is too small
-    # if [[ $IS_MINSIZE -eq 0 ]]; then
-    #   printf "%s\n" "Target size ${TARGET_SIZE}MB is too small!" >&2
-    #   printf "%s %s\n" "Try values larger than" "${T_MINSIZE}MB" >&2
-    #   exit 1
-    # fi
-    #
-    # # Set target audio bitrate
-    # TARGET_AUDIO_RATE=$ORIGINAL_AUDIO_RATE
-    #
-    # # Calculate target video rate - MB -> KiB/s
-    # TARGET_VIDEO_RATE=$(
-    #   awk \
-    #     -v size="$TARGET_SIZE" \
-    #     -v duration="$ORIGINAL_DURATION" \
-    #     -v audio_rate="$ORIGINAL_AUDIO_RATE" \
-    #     'BEGIN { print  ( ( size * 8192.0 ) / ( 1.048576 * duration ) - audio_rate) }'
-    # )
+    original_audio_bitrate = get_audio_bitrate(filename)
+    target_min_size_bits = original_audio_bitrate * duration
+    target_min_size_megabytes = target_min_size_bits / (8 * 1000 ** 2)
+    if size_megabytes < target_min_size_megabytes:
+        raise ValueError(f"Target size too small, minimum size is {target_min_size_megabytes}")
+    target_video_bitrate = (size_megabytes * 8 * 1000 ** 2) / duration - original_audio_bitrate
+    in_file = filename
+    out_file = filename[:-len(".mp4")] + f".{size_megabytes}mb.mp4"
+    compress_to_bitrate(in_file, out_file, target_video_bitrate)
 
 
-def convert(in_file, out_file, target_rate, target_audio_rate):
+def compress_to_bitrate(in_file, out_file, target_video_bitrate) -> None:
     # https://ffmpeg.org/ffmpeg-all.html
 
-    first_pass_process = subprocess.run(
+    subprocess.run(
         [
             "ffmpeg",
             "-y",  # Overwrite output files without asking (global)
-            "-i",
-            in_file,
-            "-codec:v",
-            "libx264",
-            "-b:v",  # set bitrate
-            f"{target_rate}k",  # todo
-            "-pass",
-            "1",
+            "-i", in_file,  # input file
+            "-codec:v", "libx264",  # video codec
+            "-b:v", f"{target_video_bitrate}",  # target video bitrate
+            "-pass", "1",  # first pass
             "-an",  # skip audio stream
-            "-f",  # output
-            "rawvideo",  # "encode" into raw video
+            "-f", "rawvideo",  # output format raw video
             "/dev/null",  # dump to null
         ],
         capture_output=False,
         check=True,
     )
-    second_pass_process = subprocess.run(
+    subprocess.run(
         [
             "ffmpeg",
-            "-i",
-            in_file,
-            "-c:v",
-            "libx264",
-            "-b:v",
-            f"{target_rate}k",  # todo
-            "-pass",
-            "2",
-            "-c:a",  # select audio codec: don't change it
-            "copy",
+            "-i", in_file,  # input file
+            "-c:v", "libx264",  # video codec
+            "-b:v", f"{target_video_bitrate}",  # target video bitrate
+            "-pass", "2",  # 2nd pass
+            "-c:a", "copy",  # set audio codec copy only
             out_file,
-            "",
         ],
         capture_output=False,
         check=True,
