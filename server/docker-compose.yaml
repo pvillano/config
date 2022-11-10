@@ -11,8 +11,9 @@ services:
       - TZ=${TZ}
     volumes:
       - ${config}/radarr:/config
-      - ${movies}:/movies #optional
-      - ${downloads}:/downloads #optional
+#      - ${movies}:/movies
+#      - ${downloads}:/downloads
+      - ${data}:/data
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -26,8 +27,9 @@ services:
       - TZ=${TZ}
     volumes:
       - ${config}/sonarr:/config
-      - ${tv}:/tv #optional
-      - ${downloads}:/downloads #optional
+#      - ${tv}:/tv
+#      - ${downloads}:/downloads
+      - ${data}:/data
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -39,11 +41,11 @@ services:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
-      - AUTO_UPDATE=true #optional
+      - AUTO_UPDATE=false
 #      - RUN_OPTS=<run options here> #optional
     volumes:
       - ${config}/jackett:/config
-      - ${downloads}:/downloads
+      - ${data}/downloads:/downloads
     ports:
       - 9117:9117
     restart: unless-stopped
@@ -60,13 +62,12 @@ services:
 #      - JELLYFIN_PublishedServerUrl=192.168.0.5 #optional
     volumes:
       - ${config}/jellyfin:/config
-      - ${tv}:/data/tvshows
-      - ${movies}:/data/movies
+      - ${data}/tv:/data/tvshows
+      - ${data}/movies:/data/movies
     ports:
       - 8096:8096
-      - 8920:8920 #optional
-      - 7359:7359/udp #optional
-      - 1900:1900/udp #optional
+      - 7359:7359/udp
+      - 1900:1900/udp
     restart: unless-stopped
   # https://hub.docker.com/r/linuxserver/plex
   plex:
@@ -80,10 +81,10 @@ services:
 #      - PLEX_CLAIM= #optional
     volumes:
       - ${config}/plex:/config
-      - ${tv}:/tv
-      - ${movies}:/movies
+      - ${data}/tv:/tv
+      - ${data}/movies:/movies
     restart: unless-stopped
-
+  # https://hub.docker.com/r/linuxserver/qbittorrent
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
@@ -91,12 +92,27 @@ services:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
-      - WEBUI_PORT=8080
+      - WEBUI_PORT=${QBITTORRENT_WEBUI_PORT}
     volumes:
       - ${config}/qbittorrent:/config
-      - ${downloads}:/downloads
+      - ${data}/downloads:/downloads
+    network_mode: "service:gluetun"
+#   ports: # (intercepted by gluetun)
+#     - ${QBITTORRENT_WEBUI_PORT}:${QBITTORRENT_WEBUI_PORT} # qbittorrent web ui
+    restart: unless-stopped
+  # https://github.com/qdm12/gluetun
+  gluetun:
+    image: qmcgaw/gluetun
+    container_name: gluetun
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - VPN_SERVICE_PROVIDER=mullvad
+      - VPN_TYPE=wireguard
+      - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY}
+      - WIREGUARD_ADDRESSES=${WIREGUARD_ADDRESSES}
+      - SERVER_CITIES=${SERVER_CITIES}
+      - FIREWALL_VPN_INPUT_PORTS=${FIREWALL_VPN_INPUT_PORTS}
     ports:
-      - 8080:8080
-      - 6881:6881
-      - 6881:6881/udp
+      - ${QBITTORRENT_WEBUI_PORT}:${QBITTORRENT_WEBUI_PORT} # qbittorrent web ui
     restart: unless-stopped
