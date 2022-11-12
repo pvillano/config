@@ -6,8 +6,6 @@ services:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
       - TZ=${TZ}
     volumes:
       - ${config}/radarr:/config
@@ -22,8 +20,6 @@ services:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
       - TZ=${TZ}
     volumes:
       - ${config}/sonarr:/config
@@ -38,8 +34,6 @@ services:
     image: lscr.io/linuxserver/jackett:latest
     container_name: jackett
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
       - TZ=${TZ}
       - AUTO_UPDATE=false
 #      - RUN_OPTS=<run options here> #optional
@@ -56,8 +50,6 @@ services:
     devices:
       - /dev/dri:/dev/dri
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
       - TZ=${TZ}
 #      - JELLYFIN_PublishedServerUrl=192.168.0.5 #optional
     volumes:
@@ -75,8 +67,6 @@ services:
     container_name: plex
     network_mode: host
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
       - VERSION=docker
 #      - PLEX_CLAIM= #optional
     volumes:
@@ -89,8 +79,6 @@ services:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
       - TZ=${TZ}
       - WEBUI_PORT=${QBITTORRENT_WEBUI_PORT}
     volumes:
