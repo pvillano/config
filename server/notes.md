@@ -10,6 +10,10 @@
     * host: gluetun
     * Username:
     * Password:
+* Settings -> Download Clients -> Remote Path Mappings
+  * Host: gluetun
+  * Remote Path /downloads/
+  * Local Path /data/downloads/
 * Settings-> Indexers -> Add Indexer
   * Torrents -> Torznab -> Custom
     * Name: <blah>
@@ -19,3 +23,8 @@
 * Settings -> Media Management -> Root Folders
   * Sonarr: /data/tv
   * Radarr: /data/movies
+# Jellyfin setup
+* Follow wizard
+  * Setup your media libraries
+    * Movies /data/movies
+    * Shows /data/tvshows
