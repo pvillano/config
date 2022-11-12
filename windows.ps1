@@ -157,3 +157,7 @@ Foreach ($app_url in $app_urls) {
     Start-Process $app_url
 }
 
+# setup password-less ssh to server
+# ssh-keygen -t rsa -b 4096 -f $env:USERPROFILE\.ssh\lilnasxiv.id_rsa
+
+# type $env:USERPROFILE/.ssh/lilnasxiv.id_rsa.pub | ssh pvillano@lilnasxiv.local "cat >> ~/.ssh/authorized_keys"

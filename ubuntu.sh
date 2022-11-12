@@ -31,3 +31,7 @@ else
     # todo
 #     mullvad do something
 fi
+
+#if [[ its a server]]
+#  sudo apt install avahi-daemon
+#fi
