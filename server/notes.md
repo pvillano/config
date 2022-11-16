@@ -1,9 +1,18 @@
+# Server setup
+* Install ubuntu
+* Install docker and docker-compose
+* clone the repo
+* doublecheck the .env
+* docker-compose up
+
 # Jackett setup
+* port 9117
 * Add Indexer
   * Filter-> public
   * click on a bunch idk
   * save
 # Radarr, Sonarr setup
+* ports 7878 and 8989
 * Settings->Download Clients->+
   * Torrents-> qBittorrent
     * Name: qBittorrent
@@ -23,6 +32,17 @@
 * Settings -> Media Management -> Root Folders
   * Sonarr: /data/tv
   * Radarr: /data/movies
+* Settings -> Media Management -> Episode Naming
+  * Series Folder Format
+    * {Series TitleTheYear} [tvdbid-{TvdbId}]
+  * Season Folder Format
+    * Season {season:00}
+  * Specials Folder Format
+    * Season 00
+  * Multi-Episode Style
+    * Range
+  * Movie Folder Format
+    * {Movie TitleThe} ({Release Year}) [tmdbid-{TmdbId}]
 # Jellyfin setup
 * Follow wizard
   * Setup your media libraries
