@@ -5,10 +5,12 @@
 www.youtube.com###secondary
 www.youtube.com##.ytp-endscreen-content
 m.youtube.com##ytm-item-section-renderer[section-identifier="related-items"]
+m.youtube.com##div[tab-identifier="FEwhat_to_watch"]
+m.youtube.com##div[class="pivot-bar-item-tab pivot-shorts"]
+m.youtube.com##div[class="pivot-bar-item-tab pivot-w2w"]
 
 ! annoying https://fandom.com
 fandom.com##.page__right-rail
 fandom.com###mixed-content-footer
 fandom.com##.global-navigation
 fandom.com##.mcf-en
-
