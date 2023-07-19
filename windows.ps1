@@ -64,6 +64,7 @@ $app_ids = @(
     "7zip.7zip",
     "Amazon.Games",
     "angryziber.AngryIPScanner",
+    "AntibodySoftware.WizTree",
     "Balena.Etcher",
     "BlenderFoundation.Blender",
     "Canonical.Ubuntu",
@@ -110,8 +111,7 @@ $app_ids = @(
     "Ubisoft.Connect",
     "Ultimaker.Cura",
     "Valve.Steam",
-    "VideoLAN.VLC",
-    "WinDirStat.WinDirStat"
+    "VideoLAN.VLC"
 );
 
 # From https://chrislayers.com/2021/08/01/scripting-winget/
