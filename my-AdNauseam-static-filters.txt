@@ -23,3 +23,11 @@ youtube.com
 hntoplinks.com
 instagram.com
 news.ycombinator.com
+
+reddit.com##html
+twitter.com##html
+m.youtube.com##html
+youtube.com##html
+hntoplinks.com##html
+instagram.com##html
+news.ycombinator.com##html
