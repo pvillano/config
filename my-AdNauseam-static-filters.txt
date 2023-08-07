@@ -14,3 +14,12 @@ fandom.com##.page__right-rail
 fandom.com###mixed-content-footer
 fandom.com##.global-navigation
 fandom.com##.mcf-en
+
+! endless scrolling
+reddit.com
+twitter.com
+m.youtube.com
+youtube.com
+hntoplinks.com
+instagram.com
+news.ycombinator.com
