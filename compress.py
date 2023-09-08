@@ -4,10 +4,10 @@ import subprocess
 import sys
 
 USAGE = """Usage: compress FILE.mp4 [SIZE]
-Compress the given file into an mp4 of size SIZE, in MB. Defaults to 8MB if not given.
+Compress the given file into an mp4 of size SIZE, in MB. Defaults to 25MB if not given.
 new file name is FILE.SIZEmb.mp4
 """
-DEFAULT_MB = 8
+DEFAULT_MB = 25
 
 
 def main():
@@ -17,7 +17,7 @@ def main():
         return
     filename = argv[1]
     if argc == 2:
-        size = 8
+        size = DEFAULT_MB
     else:
         size = int(sys.argv[2])
     compress_to_size(filename, size)
