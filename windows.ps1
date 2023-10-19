@@ -163,9 +163,22 @@ Foreach ($app_url in $app_urls) {
 }
 
 
-# Disable "Show more options" context menu for Current User
-reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
-# reg delete HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32 /ve /d "" /f
+Write-Host pinning packages for which winget upgrade --all does not work
+
+$pin_app_ids = @(
+    "Autodesk.AutodeskAccess",
+    "Discord.Discord",
+    "ElectronicArts.EADesktop",
+    "JetBrains.RustRover",
+    "OBSProject.OBSStudio",
+    "Python.Launcher",
+    "Ubisoft.Connect"
+}
+
+Foreach ($app_id in $app_ids) {
+    winget pin add $app_id
+}
+
 
 # setup password-less ssh to server
 # ssh-keygen -t rsa -b 4096 -f $env:USERPROFILE\.ssh\lilnasxiv.id_rsa
