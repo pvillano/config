@@ -65,6 +65,7 @@ $app_ids = @(
     "Amazon.Games",
     "angryziber.AngryIPScanner",
     "AntibodySoftware.WizTree",
+    "Audacity.Audacity",
     "Balena.Etcher",
     "BlenderFoundation.Blender",
     "Canonical.Ubuntu",
