@@ -141,7 +141,6 @@ git config --global core.autocrlf input
 # Apps which have to be downloaded and installed manually
 $app_urls = @(
     "https://www.autodesk.com/products/fusion-360/appstream",
-    "https://www.blizzard.com/en-us/download/confirmation?platform=windows&locale=en_US&product=bnetdesk",
     "https://lychee.mango3d.io/",
     "https://mobaxterm.mobatek.net/download-home-edition.html",
     "https://gamedownloads.rockstargames.com/public/installer/Rockstar-Games-Launcher.exe"
@@ -149,7 +148,6 @@ $app_urls = @(
 
 # TODO
 # winget list --name "Autodesk Fusion 360"
-# winget list --name "Battle.net"
 # winget list --name "LycheeSlicer"
 # winget list --name "Rockstar Games Launcher"
 
