@@ -85,22 +85,24 @@ $app_ids = @(
     "Google.ChromeRemoteDesktop",
     "Inkscape.Inkscape",
     "ItchIo.Itch",
-    "JetBrains.PyCharm.Community",
-    "Julialang.Julia",
+    "JetBrains.Toolbox",
     "Microsoft.PowerShell",
-    "Microsoft.VisualStudio.2022.BuildTools",
+    "Microsoft.PowerToys",
+    "Microsoft.VisualStudio.2022.Community",
     "Microsoft.WindowsTerminal",
     "Microsoft.WindowsSDK",
     "Microsoft.YourPhone_8wekyb3d8bbwe",
+    "Mobatek.MobaXterm",
     "Mozilla.Firefox",
     "Mozilla.Firefox.DeveloperEdition",
-    "MullvadVPN.MullvadVPN",
     "NexusMods.Vortex",
     "Notepad++.Notepad++",
     "OBSProject.OBSStudio",
     "OpenSCAD.OpenSCAD",
     "OpenWhisperSystems.Signal",
     "osk.tetr",
+    "Playnite.Playnite",
+    "PTRTECH.UVtools",
     "Prusa3D.PrusaSlicer",
     "Python.Python.3",
     "qBittorrent.qBittorrent",
@@ -112,7 +114,9 @@ $app_ids = @(
     "Ubisoft.Connect",
     "Ultimaker.Cura",
     "Valve.Steam",
-    "VideoLAN.VLC"
+    "VideoLAN.VLC",
+    "VSCodium.VSCodium",
+    "WinMerge.WinMerge"
 );
 
 # From https://chrislayers.com/2021/08/01/scripting-winget/
@@ -136,14 +140,16 @@ winget install --silent --accept-package-agreements --name "Shutdown Timer Class
 # disable Bing in Start Menu
 New-ItemProperty -Path HKCU:HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search -Name BingSearchEnabled -Value 0
 
-git config --global core.autocrlf input
+# Disable "Show more options" context menu for Current User
+reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
+# reg delete HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32 /ve /d "" /f
+
 
 
 # Apps which have to be downloaded and installed manually
 $app_urls = @(
     "https://www.autodesk.com/products/fusion-360/appstream",
     "https://lychee.mango3d.io/",
-    "https://mobaxterm.mobatek.net/download-home-edition.html",
     "https://gamedownloads.rockstargames.com/public/installer/Rockstar-Games-Launcher.exe"
 );
 
