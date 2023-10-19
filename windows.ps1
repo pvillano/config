@@ -146,20 +146,19 @@ reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\Inpr
 
 
 
-# Apps which have to be downloaded and installed manually
-$app_urls = @(
-    "https://www.autodesk.com/products/fusion-360/appstream",
-    "https://lychee.mango3d.io/",
-    "https://gamedownloads.rockstargames.com/public/installer/Rockstar-Games-Launcher.exe"
-);
+Write-Host opening urls for packages which have to be downloaded and installed manually
 
-# TODO
-# winget list --name "Autodesk Fusion 360"
-# winget list --name "LycheeSlicer"
-# winget list --name "Rockstar Games Launcher"
+$apps = @(
+    @{name = "Autodesk Fusion 360"; url = "https://www.autodesk.com/products/fusion-360/appstream"},
+    @{name = "LycheeSlicer"; url = "https://lychee.mango3d.io/"},
+    @{name = "Rockstar Games Launcher"; url = "https://gamedownloads.rockstargames.com/public/installer/Rockstar-Games-Launcher.exe"}
+)
 
-Foreach ($app_url in $app_urls) {
-    Start-Process $app_url
+Foreach ($app in $apps) {
+    $listApp = winget list --name $app.name
+    if (![String]::Join("", $listApp).Contains($app.name)) {
+        Start-Process $app.url
+    }
 }
 
 
