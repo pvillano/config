@@ -155,6 +155,11 @@ Foreach ($app_url in $app_urls) {
     Start-Process $app_url
 }
 
+
+# Disable "Show more options" context menu for Current User
+reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
+# reg delete HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32 /ve /d "" /f
+
 # setup password-less ssh to server
 # ssh-keygen -t rsa -b 4096 -f $env:USERPROFILE\.ssh\lilnasxiv.id_rsa
 
