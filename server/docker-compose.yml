@@ -43,24 +43,6 @@ services:
     ports:
       - 9117:9117
     restart: unless-stopped
-#    https://hub.docker.com/r/linuxserver/jellyfin
-  jellyfin:
-    image: lscr.io/linuxserver/jellyfin:latest
-    container_name: jellyfin
-    devices:
-      - /dev/dri:/dev/dri
-    environment:
-      - TZ=${TZ}
-#      - JELLYFIN_PublishedServerUrl=192.168.0.5 #optional
-    volumes:
-      - ${config}/jellyfin:/config
-      - ${data}/tv:/data/tvshows
-      - ${data}/movies:/data/movies
-    ports:
-      - 8096:8096
-      - 7359:7359/udp
-      - 1900:1900/udp
-    restart: unless-stopped
   # https://hub.docker.com/r/linuxserver/plex
   plex:
     image: lscr.io/linuxserver/plex:latest
@@ -96,9 +78,10 @@ services:
       - NET_ADMIN
     environment:
       - TZ=${TZ}
-      - VPN_SERVICE_PROVIDER=mullvad
+      - VPN_SERVICE_PROVIDER=airvpn
       - VPN_TYPE=wireguard
       - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY}
+      - WIREGUARD_PRESHARED_KEY=${WIREGUARD_PRESHARED_KEY}
       - WIREGUARD_ADDRESSES=${WIREGUARD_ADDRESSES}
       - SERVER_CITIES=${SERVER_CITIES}
       - FIREWALL_VPN_INPUT_PORTS=${FIREWALL_VPN_INPUT_PORTS}
