@@ -1,3 +1,7 @@
+! Title: pvillano's filters
+! Last modified: Mon, 30 Oct 2023 00:00:00 +0000
+! Expires: 12 hours
+
 ! ads https://1337x.to
 1337x.to##iframe
 
@@ -7,10 +11,13 @@ www.youtube.com##.ytp-endscreen-content
 www.youtube.com##ytd-mini-guide-entry-renderer.ytd-mini-guide-renderer.style-scope:nth-of-type(1)
 www.youtube.com##ytd-mini-guide-entry-renderer.ytd-mini-guide-renderer.style-scope:nth-of-type(2)
 www.youtube.com#?#ytd-browse:-abp-has(.ytd-feed-filter-chip-bar-renderer)
+www.youtube.com##.ytp-button.ytp-next-button
 m.youtube.com##ytm-item-section-renderer[section-identifier="related-items"]
 m.youtube.com##div[tab-identifier="FEwhat_to_watch"]
 m.youtube.com##div[class="pivot-bar-item-tab pivot-shorts"]
 m.youtube.com##div[class="pivot-bar-item-tab pivot-w2w"]
+m.youtube.com##button[aria-label="Next video"]
+m.youtube.com##button[aria-label="Previous video"]
 
 ! annoying https://fandom.com
 fandom.com##.page__right-rail
@@ -20,5 +27,3 @@ fandom.com##.mcf-en
 
 ! infinite scroll https://reddit.com todo: better
 www.reddit.com##div:nth-child(n+25)
-
-! todo: infinite scroll https://reddit.com
