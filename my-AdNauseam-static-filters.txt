@@ -24,6 +24,3 @@ fandom.com##.page__right-rail
 fandom.com###mixed-content-footer
 fandom.com##.global-navigation
 fandom.com##.mcf-en
-
-! infinite scroll https://reddit.com todo: better
-www.reddit.com##div:nth-child(n+25)
