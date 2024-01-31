@@ -1,5 +1,5 @@
 ! Title: pvillano's filters
-! Last modified: Mon, 30 Oct 2023 00:00:00 +0000
+! Last modified: Wed, 31 Jan 2024 00:00:00 +0000
 ! Expires: 12 hours
 
 ! ads https://1337x.to
@@ -24,3 +24,6 @@ fandom.com##.page__right-rail
 fandom.com###mixed-content-footer
 fandom.com##.global-navigation
 fandom.com##.mcf-en
+
+! this button softlocks the site...
+twitter.com##a[href$="analytics"]
