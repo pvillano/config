@@ -27,18 +27,3 @@ fandom.com##.mcf-en
 
 ! this button softlocks the site...
 twitter.com##a[href$="analytics"]
-
-!for now
-reddit.com
-twitter.com
-youtube.com
-instagram.com
-news.ycombinator.com
-hntoplinks.com
-
-reddit.com##html
-twitter.com##html
-youtube.com##html
-instagram.com##html
-news.ycombinator.com##html
-hntoplinks.com##html
