@@ -63,6 +63,7 @@ Write-Host finished uninstalling
 $app_ids = @(
     "7zip.7zip",
     "Amazon.Games",
+    "Armin2208.WindowsAutoNightMode",
     "angryziber.AngryIPScanner",
     "AntibodySoftware.WizTree",
     "Audacity.Audacity",
