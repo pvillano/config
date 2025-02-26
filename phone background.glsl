@@ -36,13 +36,13 @@ float f(vec2 xy){
  /\/\/\
  \/\/\/
 */
-void mainImage( out vec4 fragColor, in vec2 fragCoord )
+void mainImage(out vec4 fragColor, in vec2 fragCoord)
 {
     #ifdef wallpaperapp
     float iTime = time;
     vec2 resolution = iResolution;
     #else
-    vec2 offset = vec2(.0,0.);
+    vec2 offset = vec2(.0, 0.);
     float battery = .5;
     int powerConnected = 0;
 
@@ -70,6 +70,6 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 #ifdef wallpaperapp
 
 void main(void) {
-    mainImage( gl_fragColor, gl_FragCoord )
+    mainImage(gl_fragColor, gl_FragCoord);
 }
 #endif
