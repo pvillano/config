@@ -18,6 +18,9 @@ m.youtube.com##div[class="pivot-bar-item-tab pivot-shorts"]
 m.youtube.com##div[class="pivot-bar-item-tab pivot-w2w"]
 m.youtube.com##button[aria-label="Next video"]
 m.youtube.com##button[aria-label="Previous video"]
+m.youtube.com##.reel-shelf-items
+m.youtube.com##.reel-shelf-header
+m.youtube.com###player-shorts-container
 
 ! annoying https://fandom.com
 fandom.com##.page__right-rail
@@ -27,3 +30,5 @@ fandom.com##.mcf-en
 
 ! this button softlocks the site...
 x.com##a[href$="analytics"]
+
+en.m.wikipedia.org##.banner-container
