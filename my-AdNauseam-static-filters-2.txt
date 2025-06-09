@@ -1,0 +1,20 @@
+! Title: Distractions
+! Last modified: Sun June 8, 2025 00:00:00 +0000
+! Expires: 12 hours
+
+!temptation
+hntoplinks.com
+instagram.com
+m.youtube.com
+news.ycombinator.com
+reddit.com
+x.com
+youtube.com
+
+hntoplinks.com##html
+instagram.com##html
+m.youtube.com##html
+news.ycombinator.com##html
+reddit.com##html
+x.com##html
+youtube.com##html
