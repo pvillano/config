@@ -20,15 +20,7 @@ cat <<EOF > ~/.bunfig.toml
 minimumReleaseAge = 604800 # seconds
 EOF
 
-sudo apt update
-sudo apt upgrade -y
+sudo pacman -Syu --noconfirm
+sudo pacman -S --noconfirm --needed git base-devel yay
 
-sudo apt install -y ffmpeg \
-    moreutils \
-    python3-pip \
-    lxd \
-    unzip
-
-#if [[ its a server]]
-#  sudo apt install avahi-daemon
-#fi
+yay discord nodejs npm prusa-slicer steam webstorm webstorm-jre
