@@ -23,4 +23,4 @@ EOF
 sudo pacman -Syu --noconfirm
 sudo pacman -S --noconfirm --needed git base-devel yay
 
-yay discord nodejs npm prusa-slicer steam webstorm webstorm-jre
+yay discord nodejs npm prusa-slicer steam webstorm webstorm-jre wireguard-tools eddie
