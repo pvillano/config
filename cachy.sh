@@ -24,3 +24,6 @@ sudo pacman -Syu --noconfirm
 sudo pacman -S --noconfirm --needed git base-devel yay
 
 yay discord nodejs npm prusa-slicer steam webstorm webstorm-jre wireguard-tools eddie
+
+
+echo "\`sudo visudo\` and then add 'Default pwfeedback' to enable asterisks"
