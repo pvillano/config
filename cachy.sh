@@ -1,5 +1,13 @@
 #!/bin/bash
 
+echo sudo: adding astrisks and extending timeout
+
+sudo cp ./sudoers.d/feedback ./sudoers.d/timeout /etc/sudoers.d
+sudo chmod 0440 /etc/sudoers.d/feedback /etc/sudoers.d/timeout
+sudo visudo -c
+
+echo adding waiting periods for package managers...
+
 mkdir --parents ~/.config/uv/
 cat <<EOF > ~/.config/uv/uv.toml
 exclude-newer = "7 days"
@@ -20,10 +28,24 @@ cat <<EOF > ~/.bunfig.toml
 minimumReleaseAge = 604800 # seconds
 EOF
 
+echo installing yay
+
 sudo pacman -Syu --noconfirm
 sudo pacman -S --noconfirm --needed git base-devel yay
 
-yay discord nodejs npm prusa-slicer steam webstorm webstorm-jre wireguard-tools eddie
+git config --global user.email "peter@saej.in"
+git config --global user.name "Peter Villano"
 
+echo please manually select :\)
 
-echo "\`sudo visudo\` and then add 'Default pwfeedback' to enable asterisks"
+yay github
+yay discord
+yay nodejs
+yay npm
+yay prusa-slicer
+yay steam
+yay webstorm
+yay webstorm-jre
+yay wireguard-tools
+yay eddie
+
