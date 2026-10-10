@@ -1,2 +1,3 @@
 *.mp4
 /server/windows.env
+.idea
